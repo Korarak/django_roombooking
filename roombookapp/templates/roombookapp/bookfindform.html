@@ -1,0 +1,42 @@
+{% extends "roombookapp/base.html" %}
+{% block content %}
+<div class="container">
+    <h4>ค้นหาการจอง</h4>
+<form action="" method="post">
+  {% csrf_token %}
+  <label for="date_search">วันที่จอง</label>
+  <input type="date" id="date_search" name="date_search" required>
+  <button type="submit" class="btn btn-success" >ค้นหา</button>
+  </form>
+  <h2>ตารางแสดงรายการจองห้องประชุม</h2>
+  <p></p>            
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th>ลำดับ</th> -->
+        <th>วันที่จอง</th>
+        <th>ช่วงเวลา</th>
+        <th>ชื่อผู้จอง</th>
+        <th>รายละเอียด</th>
+        <th>โทร</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in bookingdata %}
+      <tr>
+      <!-- <td>{{forloop.counter}}</td> -->
+      <td>{{i.start_date}}</td>
+      <td>{{i.start_time}} - {{i.end_time}}</td>
+      <td>{{i.book_user}}</td>
+      <td>
+        ห้อง : {{i.room_name}}
+        </td>
+        <td>{{i.book_tel}}</td>
+    </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+</div>
+  {% endblock content %}

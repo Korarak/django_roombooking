@@ -1,0 +1,58 @@
+{% extends "roombookapp/base.html" %}
+{% block content %}
+<div class="container">
+    <h4>แบบฟอร์มของใช้งานห้องประชุม</h4>
+<form action="" method="post">
+  {% csrf_token %}
+    <label for="room_name">เลือกห้องประชุม</label>
+      <select class="form-control" id="room_name" name="room_name" required>
+        <option selected="selected" value="">เลือกห้องประชุม</option>
+        {% for i in roomdata %}
+        <option value="{{ i.room_name }}">{{ i.room_name }}</option>
+        {% endfor %}
+      </select>
+      <p></p>
+      <label for="room_go">จุดประสงค์การใช้งาน</label>
+      <select class="form-control" id="room_go" name="room_go" required>
+        <option selected="selected" value="">เลือกจุดประสงค์การใช้งาน</option>
+        <option>ประชุม</option>
+        <option>อบรม</option>
+        <option>จัดการเรียนการสอน</option>
+        <option>รับการประเมิน</option>
+        <option>รับการศึกษาดูงาน</option>
+        <option>อื่นๆ</option>
+      </select>
+      <p></p>
+      <label for="start_date">จองวันที่ </label>
+      <input type="date" id="start_date" name="start_date" required>
+      <p></p>
+      
+      <label for="start_time">ตั้งแต่เวลา </label>
+      <input type="number" id="start_timeh" name="start_timeh" min="0" max="24" required> :
+      <input type="number" id="start_timem" name="start_timem" min="0" max="60" required> น.
+      {% comment %} <input type="number" id="start_time" name="start_time" value=""> {% endcomment %}
+      <p></p>
+      <label for="end_time">ถึงเวลา &nbsp;&nbsp;&nbsp;</label>
+      <input type="number" id="end_timeh" name="end_timeh" min="0" max="24" required> :
+      <input type="number" id="end_timem" name="end_timem" min="0" max="60" required> น.
+      {% comment %} <input type="number" id="end_time" name="end_time" value=""> {% endcomment %}
+      <p></p>
+      <div class="form-group">
+        <label for="book_detail">ข้อความแสดงบนจอ</label>
+        <input type="text" class="form-control" placeholder="จองเพื่อใช้ในงาน" id="book_detail" name="book_detail">
+      </div>
+      <div class="form-group">
+        <label for="book_user">ชื่อผู้จอง</label>
+        <input type="text" class="form-control" placeholder="กรอกชื่อ-นามสกุล" id="book_user" name="book_user" required>
+      </div>
+      <div class="form-group">
+        <label for="book_tel">เบอร์โทร</label>
+        <input type="text" class="form-control" placeholder="กรอกเบอร์โทร" id="book_tel" name="book_tel"
+        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+      </div>
+      <input class="btn btn-success" type="submit" value="บันทึก">
+      <br><br><br>
+      
+  </form>
+</div>
+  {% endblock content %}
